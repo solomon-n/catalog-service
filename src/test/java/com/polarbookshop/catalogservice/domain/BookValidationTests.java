@@ -7,6 +7,9 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import com.polarbookshop.catalogservice.domain.Book;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BookValidationTests {
