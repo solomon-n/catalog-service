@@ -1,6 +1,4 @@
 package com.polarbookshop.catalogservice.domain;
- 
-import com.polarbookshop.catalogservice.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
@@ -14,8 +12,8 @@ class BookJsonTests {
   private JacksonTester<Book> json;
  
   @Test
-  void testSerialize() throws Exception {
-    var book = new Book("1234567890", "Title", "Author", 9.90);
+  void testSerialize() throws Exception {    
+    var book =  Book.of("1234567890", "Title", "Author", 9.90,"Polarsophia");
     var jsonContent = json.write(book);
     assertThat(jsonContent).extractingJsonPathStringValue("@.isbn")
       .isEqualTo(book.isbn());
@@ -34,11 +32,12 @@ class BookJsonTests {
         "isbn": "1234567890",
         "title": "Title",
         "author": "Author",
-        "price": 9.90
+        "price": 9.90,
+        "publisher": "Polarsophia"
       }
       """;
     assertThat(json.parse(content))
       .usingRecursiveComparison()
-      .isEqualTo(new Book("1234567890", "Title", "Author", 9.90));
+      .isEqualTo( Book.of("1234567890", "Title", "Author", 9.90,"Polarsophia"));
   }
 }
